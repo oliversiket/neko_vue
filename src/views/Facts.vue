@@ -20,8 +20,8 @@
 
   </div>
 
-  <div v-else class="d-flex justify-content-center">
-    <div class="spinner-grow text-danger" role="status">
+  <div v-else class="spinner d-flex justify-content-center">
+    <div class="spinner-grow text-info" role="status">
         <span class="sr-only">Loading...</span>
     </div>
   </div>
@@ -44,6 +44,7 @@ export default {
         return {
           loading: false,
           data: [],
+          sId: this.$store.state.selectedId
         }
     },
     created () {
@@ -74,8 +75,12 @@ export default {
       },
 
       addToFavourites() {
-        if (!this.favourites.includes(this.$store.state.selectedId)) {
-          this.$store.commit('addFav', this.$store.state.selectedId)
+        if (!this.favourites.some(cat => cat.id === this.sId)) {
+          let fav = {
+            id: this.sId,
+            name: this.$store.state.selected
+          }
+          this.$store.commit('addFav', fav)
           this.$toaster.success('Added to your favourites')
         }else {
           this.$toaster.error('This has already been added to your favourites')
@@ -90,6 +95,15 @@ export default {
 </script>
 
 <style scoped>
+.spinner {
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.spinner-grow{
+  width: 4em;
+  height: 4em;
+}
 .links {
   text-align: left;
 }
@@ -99,6 +113,7 @@ export default {
   flex-direction: column;
 }
 img{
-  width: 200px;
+  width: 250px;
+  border-radius: 15px;
 }
 </style>

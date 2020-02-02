@@ -5,7 +5,7 @@
             <h4 class="m-0">Your favourites:</h4>
         </header>
         <ul>
-            <li v-for="fav in favs" :key="fav.id">{{ fav }} </li>
+            <li v-for="fav in favs" :key="fav.id">{{ fav.name }} <button @click="removeFav(fav)" type="button" class="addFav btn btn-danger m-1">X</button></li>
         </ul>
     </div>
 </template>
@@ -17,6 +17,12 @@ export default {
     props: {
         favs: { type: Array, required: true }
     },
+    methods: {
+        removeFav(fav) {
+            this.$store.commit('remFav', fav.id);
+            this.$toaster.success(`${fav.name} has been removed from your favourites`)
+        }
+    }
 }
 </script>
 

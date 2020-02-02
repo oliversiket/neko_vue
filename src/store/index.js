@@ -21,9 +21,18 @@ export default new Vuex.Store({
       state.selectedId = id
     },
 
-    addFav (state, fav) {
+    addFav (state, { id, name }) {
+      let fav = {
+        id,
+        name
+      }
       state.favourites.push(fav)
     },
+    remFav(state, id) {
+      let filtered = state.favourites.filter(cat => cat.id !== id);
+      state.favourites = filtered;
+    },
+
     reset (state) {
       state.selected = '',
       state.selectedId = '',

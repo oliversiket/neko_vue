@@ -114,13 +114,13 @@ header label {
   font-size: 2em;
 }
 .spinner {
-  height: 100%;
+  height: 100vh;
   align-items: center;
   justify-content: center;
 }
 .spinner-grow {
-  width: 3em;
-  height: 3em;
+  width: 4em;
+  height: 4em;
 }
 .hello {
   height: 100vh;
